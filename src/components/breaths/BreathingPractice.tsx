@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { css, keyframes } from "styled-components";
 import tw from "twin.macro";
+import inhaleSound from "@assets/inhale.mp3";
+import holdSound from "@assets/hold.mp3";
+import exhaleSound from "@assets/exhale.mp3";
+import endSound from "@assets/end.mp3";
 
 const Container = styled.div`
   ${tw`flex flex-col items-center justify-center py-6 relative`}
@@ -78,6 +82,10 @@ const BreathingPractice: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const inhaleAudio = useRef<HTMLAudioElement | null>(null);
+  const holdAudio = useRef<HTMLAudioElement | null>(null);
+  const exhaleAudio = useRef<HTMLAudioElement | null>(null);
+  const endAudio = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     setTimeLeft(phases[phaseIdx].duration);
@@ -107,6 +115,22 @@ const BreathingPractice: React.FC = () => {
     };
   }, [phaseIdx, started, paused]);
 
+  // Play sound on phase change
+  useEffect(() => {
+    if (!started) return;
+    if (phaseIdx === 0) {
+      inhaleAudio.current?.play();
+    } else if (phaseIdx === 1) {
+      holdAudio.current?.play();
+    } else if (phaseIdx === 2) {
+      exhaleAudio.current?.play();
+    }
+    // Play end sound when a full cycle completes (when phaseIdx resets to 0, but not on initial start)
+    if (phaseIdx === 0 && started && timeLeft !== phases[0].duration) {
+      endAudio.current?.play();
+    }
+  }, [phaseIdx, started]);
+
   const handleReset = () => {
     setStarted(false);
     setPaused(false);
@@ -130,6 +154,11 @@ const BreathingPractice: React.FC = () => {
 
   return (
     <Container>
+      {/* Hidden audio elements for sound playback */}
+      <audio ref={inhaleAudio} src={inhaleSound} preload="auto" />
+      <audio ref={holdAudio} src={holdSound} preload="auto" />
+      <audio ref={exhaleAudio} src={exhaleSound} preload="auto" />
+      <audio ref={endAudio} src={endSound} preload="auto" />
       <CircleContainer>
         <ProgressCircle
           width={220}
