@@ -5,6 +5,7 @@ import { APP_UTINITIES } from "@constants/utinities";
 import { useStore } from "@store";
 import Contacts from "./Contacts";
 import Procedures from "./Procedures";
+import BreathingPractice from "@components/breaths/BreathingPractice";
 
 const HomePage: React.FunctionComponent = () => {
     const [organization] = useStore(state => [
@@ -17,16 +18,12 @@ const HomePage: React.FunctionComponent = () => {
             id="home-page"
             customHeader={
                 <HomeHeader
-                    title="DỊCH VỤ CÔNG"
+                    title="Hít thở đi!"
                     name={organization?.name || ""}
                 />
             }
         >
-            <Utinities utinities={APP_UTINITIES} />
-            <ListOA />
-            <Contacts />
-            <Procedures />
-            <NewsSection />
+            <BreathingPractice />
         </PageLayout>
     );
 };

@@ -30,7 +30,7 @@ export const APP_UTINITIES: Array<Utinity> = [
     },
     {
         key: "goverment",
-        label: "Cổng dịch vụ công quốc gia",
+        label: "Cổng Hít thở đi quốc gia",
         icon: Icon.GlobeIcon,
         link: "https://dichvucong.gov.vn/",
     },
@@ -39,6 +39,12 @@ export const APP_UTINITIES: Array<Utinity> = [
         label: "Tra cứu hồ sơ",
         icon: Icon.SearchIcon,
         path: "/search",
+    },
+    {
+        key: "breaths",
+        label: "Hít thở",
+        icon: Icon.HeadsetIcon,
+        path: "/breaths",
     },
 ];
 

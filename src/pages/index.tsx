@@ -14,6 +14,7 @@ import { CreateScheduleAppointmentPage } from "./CreateScheduleAppointment";
 import { AppointmentScheduleResultPage } from "./AppointmentScheduleResult";
 import { SearchPage } from "./Search";
 import { ProfilePage } from "./Profile";
+import FeedbackSection from "@components/breaths/FeedbackSection";
 
 const Routes: React.FC = () => (
     <ZMPRouter>
@@ -37,6 +38,7 @@ const Routes: React.FC = () => (
                 element={<InformationGuidePage />}
             />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/breaths" element={<FeedbackSection />} />
             <Route path="/profile" element={<ProfilePage />} />
         </AnimationRoutes>
     </ZMPRouter>
